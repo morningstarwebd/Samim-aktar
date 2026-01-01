@@ -12,11 +12,10 @@ import React from 'react';
 const AnimatedSection = ({ children }: { children: React.ReactNode }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 75, rotateX: -15 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      initial={{ opacity: 0, y: 75 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      style={{ perspective: '1000px' }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
