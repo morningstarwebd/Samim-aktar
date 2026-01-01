@@ -46,14 +46,6 @@ export default function Hero() {
         >
           Welcome to the practice of Dr. Jane Doe. We are dedicated to providing you with the highest quality of healthcare in a warm and friendly environment.
         </motion.p>
-        <motion.div className="flex flex-wrap gap-4" variants={itemVariants}>
-          <Button asChild size="lg">
-            <Link href="#contact">Book an Appointment</Link>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <Link href="#services">Our Services</Link>
-          </Button>
-        </motion.div>
       </motion.div>
       <motion.div 
         className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-[450px]"
@@ -71,6 +63,19 @@ export default function Hero() {
             priority
           />
         )}
+        <motion.div 
+          className="absolute bottom-6 left-1/2 w-full max-w-sm -translate-x-1/2 px-4"
+          variants={itemVariants}
+        >
+          <div className="flex flex-col gap-3 rounded-lg bg-background/80 p-4 backdrop-blur-sm sm:flex-row sm:p-3">
+            <Button asChild size="lg" className="flex-1">
+              <Link href="#contact">Book an Appointment</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="flex-1 bg-white/90">
+              <Link href="#services">Our Services</Link>
+            </Button>
+          </div>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

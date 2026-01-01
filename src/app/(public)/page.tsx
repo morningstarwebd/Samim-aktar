@@ -4,6 +4,7 @@ import About from './components/About';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
+import Flipbook from './components/Flipbook';
 import { Separator } from '@/components/ui/separator';
 import { motion } from 'framer-motion';
 import React from 'react';
@@ -32,6 +33,10 @@ export default function Home() {
       <Separator className="my-12 md:my-24" />
       <AnimatedSection>
         <Services />
+      </AnimatedSection>
+      <Separator className="my-12 md:my-24" />
+      <AnimatedSection>
+        <Flipbook />
       </AnimatedSection>
       <Separator className="my-12 md:my-24" />
       <AnimatedSection>
