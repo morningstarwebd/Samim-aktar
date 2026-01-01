@@ -8,10 +8,12 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Hero />
-      <BentoGrid />
-      <Services />
-      <Testimonials />
-      <Contact />
+      <div className='bg-background'>
+        <BentoGrid />
+        <Services />
+        <Testimonials />
+        <Contact />
+      </div>
     </div>
   );
 }
