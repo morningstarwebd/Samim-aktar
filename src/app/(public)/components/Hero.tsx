@@ -17,9 +17,9 @@ export default function Hero() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, rotateX: -10 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
-      opacity: 1, y: 0, rotateX: 0,
+      opacity: 1, y: 0,
       transition: { duration: 0.7, ease: "easeOut" }
     }
   };
@@ -30,7 +30,6 @@ export default function Hero() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      style={{ perspective: '1000px' }}
     >
       <motion.div className="flex flex-col items-start gap-6" variants={containerVariants}>
         <motion.h1 
@@ -58,10 +57,9 @@ export default function Hero() {
       </motion.div>
       <motion.div 
         className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-[450px]"
-        initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
-        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, ease: 'easeOut', delay: 0.5 }}
-        style={{ transformStyle: 'preserve-3d' }}
       >
         {heroImage && (
           <Image
