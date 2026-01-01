@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Award, GraduationCap, Stethoscope } from 'lucide-react';
+import { Award, GraduationCap } from 'lucide-react';
 
 export default function About() {
   const aboutImage = PlaceHolderImages.find(p => p.id === 'doctor-about');
@@ -16,11 +16,12 @@ export default function About() {
               fill
               className="object-cover"
               data-ai-hint={aboutImage.imageHint}
+              sizes="(max-width: 768px) 320px, 384px"
             />
           )}
         </div>
-        <div className="flex flex-col items-start gap-6">
-          <div className="flex flex-col gap-2">
+        <div className="flex flex-col items-start gap-6 text-center md:text-left">
+          <div className="flex flex-col gap-2 self-center md:self-start">
              <h2 className="font-headline text-3xl font-bold tracking-tight md:text-4xl">
                 Meet Dr. Jane Doe
             </h2>
