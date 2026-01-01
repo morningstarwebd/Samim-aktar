@@ -11,10 +11,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Stethoscope } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
 import { FirebaseError } from 'firebase/app';
 import { Spinner } from '@/components/ui/spinner';
 import { auth } from '@/lib/firebase';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -24,7 +24,6 @@ const formSchema = z.object({
 export default function LoginPage() {
   const { signIn } = useAuth();
   const router = useRouter();
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,10 +33,11 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    const toastId = toast.loading('Signing in...');
     try {
       await signIn(auth, values.email, values.password);
-      toast({
-        title: 'Login Successful',
+      toast.success('Login Successful', {
+        id: toastId,
         description: 'Welcome back, Doctor!',
       });
       router.push('/admin');
@@ -55,9 +55,8 @@ export default function LoginPage() {
             break;
         }
       }
-      toast({
-        variant: 'destructive',
-        title: 'Login Failed',
+      toast.error('Login Failed', {
+        id: toastId,
         description: errorMessage,
       });
     } finally {
@@ -66,14 +65,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-secondary/50 p-4">
-      <Card className="w-full max-w-sm">
+    <div className="flex min-h-dvh flex-col items-center justify-center p-4">
+      <Card className="w-full max-w-sm border-gray-700 bg-gray-800/60 text-gray-100 shadow-2xl backdrop-blur-md">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <Stethoscope className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="font-headline text-2xl">DocConnect Admin</CardTitle>
-          <CardDescription>Please sign in to access the dashboard.</CardDescription>
+          <CardTitle className="font-sans text-2xl">DocConnect Admin</CardTitle>
+          <CardDescription className="text-gray-400">Please sign in to access the dashboard.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -83,9 +82,9 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-gray-300">Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="doctor@example.com" {...field} />
+                      <Input type="email" placeholder="doctor@example.com" {...field} className="rounded-xl border-gray-600 bg-gray-700/50 text-white placeholder:text-gray-400 focus:ring-primary"/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -96,15 +95,15 @@ export default function LoginPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel className="text-gray-300">Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
+                      <Input type="password" placeholder="••••••••" {...field} className="rounded-xl border-gray-600 bg-gray-700/50 text-white placeholder:text-gray-400 focus:ring-primary"/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full rounded-xl" disabled={isLoading}>
                 {isLoading ? <Spinner size="small" /> : 'Sign In'}
               </Button>
             </form>

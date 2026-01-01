@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 import type { Inquiry } from '@/types';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Phone, Trash2, Mail, MoreVertical } from 'lucide-react';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
-import InquiryCard from './InquiryCard';
 import ContactDialog from './ContactDialog';
 import {
   DropdownMenu,
@@ -17,16 +15,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deleteInquiry } from '@/lib/actions';
-import { useToast } from '@/hooks/use-toast';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { toast } from 'sonner';
 
 export default function InquiryList({ initialInquiries }: { initialInquiries: Inquiry[] }) {
   const [inquiries, setInquiries] = useState<Inquiry[]>(initialInquiries);
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
   const [isContactDialogOpen, setContactDialogOpen] = useState(false);
-  const isMobile = useIsMobile();
-  const { toast } = useToast();
 
   const handleOpenContactDialog = (inquiry: Inquiry) => {
     setSelectedInquiry(inquiry);
@@ -39,20 +43,21 @@ export default function InquiryList({ initialInquiries }: { initialInquiries: In
   }
 
   const handleDelete = async (id: string) => {
+    const toastId = toast.loading('Deleting inquiry...');
     const result = await deleteInquiry(id);
     if(result.success) {
         setInquiries(prev => prev.filter(inq => inq.id !== id));
-        toast({ title: 'Success', description: 'Inquiry deleted successfully.' });
+        toast.success('Inquiry deleted', { id: toastId });
     } else {
-        toast({ variant: 'destructive', title: 'Error', description: result.message });
+        toast.error('Failed to delete', { id: toastId, description: result.message });
     }
   }
 
   if (inquiries.length === 0) {
     return (
-        <div className="text-center py-16">
+        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-700 bg-gray-800/50 py-16 text-center">
             <h3 className="text-xl font-semibold">No Inquiries Yet</h3>
-            <p className="text-muted-foreground mt-2">New patient inquiries will appear here.</p>
+            <p className="mt-2 text-gray-400">New patient inquiries will appear here.</p>
         </div>
     );
   }
@@ -60,49 +65,43 @@ export default function InquiryList({ initialInquiries }: { initialInquiries: In
   return (
     <>
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold tracking-tight">Patient Inquiries ({inquiries.length})</h2>
-        {isMobile ? (
-          <div className="grid grid-cols-1 gap-4">
-            {inquiries.map((inquiry) => (
-              <InquiryCard key={inquiry.id} inquiry={inquiry} onContact={() => handleOpenContactDialog(inquiry)} onDelete={handleDelete} />
-            ))}
-          </div>
-        ) : (
-          <Table className="bg-background rounded-lg shadow-sm">
+        <h2 className="text-2xl font-bold tracking-tight">Inquiry Feed</h2>
+        <div className="rounded-2xl border border-gray-700 bg-gray-800/60 shadow-lg backdrop-blur-md">
+          <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Patient</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Preferred Date</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+              <TableRow className="border-gray-700">
+                <TableHead className="text-gray-300">Patient</TableHead>
+                <TableHead className="text-gray-300">Phone</TableHead>
+                <TableHead className="text-gray-300">Preferred Date</TableHead>
+                <TableHead className="text-gray-300">Status</TableHead>
+                <TableHead className="text-right text-gray-300">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {inquiries.map((inquiry) => (
-                <TableRow key={inquiry.id}>
+                <TableRow key={inquiry.id} className="border-gray-700">
                   <TableCell className="font-medium">{inquiry.name}</TableCell>
-                  <TableCell>{inquiry.phone}</TableCell>
-                  <TableCell>{format(new Date(inquiry.date), 'PPP')}</TableCell>
+                  <TableCell className="text-gray-300">{inquiry.phone}</TableCell>
+                  <TableCell className="text-gray-300">{format(new Date(inquiry.date), 'PPP')}</TableCell>
                   <TableCell>
-                    <Badge variant={inquiry.status === 'contacted' ? 'default' : 'secondary'} className={inquiry.status === 'contacted' ? 'bg-accent text-accent-foreground' : ''}>
+                    <Badge variant={inquiry.status === 'contacted' ? 'accent' : 'secondary'}>
                       {inquiry.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
                      <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className="rounded-full hover:bg-gray-700">
                           <MoreVertical className="h-4 w-4" />
                           <span className="sr-only">More actions</span>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                         <DropdownMenuItem onSelect={() => handleOpenContactDialog(inquiry)}>
+                      <DropdownMenuContent align="end" className="border-gray-700 bg-gray-800 text-gray-100">
+                         <DropdownMenuItem onSelect={() => handleOpenContactDialog(inquiry)} className="focus:bg-gray-700">
                             <Mail className="mr-2 h-4 w-4" />
                             <span>Contact Patient</span>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
+                        <DropdownMenuItem asChild className="focus:bg-gray-700">
                            <a href={`tel:${inquiry.phone}`} className="flex items-center">
                               <Phone className="mr-2 h-4 w-4" />
                               <span>Call Now</span>
@@ -110,21 +109,21 @@ export default function InquiryList({ initialInquiries }: { initialInquiries: In
                         </DropdownMenuItem>
                          <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-destructive focus:text-destructive focus:bg-destructive/10">
+                            <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-red-400 focus:bg-red-900/50 focus:text-red-300">
                                 <Trash2 className="mr-2 h-4 w-4" />
                                 <span>Delete</span>
                             </DropdownMenuItem>
                           </AlertDialogTrigger>
-                          <AlertDialogContent>
+                          <AlertDialogContent className="border-gray-700 bg-gray-800 text-gray-100">
                             <AlertDialogHeader>
                               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                              <AlertDialogDescription>
+                              <AlertDialogDescription className="text-gray-400">
                                 This action cannot be undone. This will permanently delete the inquiry from {inquiry.name}.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                              <AlertDialogCancel>Cancel</AlertDialogCancel>
-                              <AlertDialogAction onClick={() => handleDelete(inquiry.id)} className="bg-destructive hover:bg-destructive/90">Delete</AlertDialogAction>
+                              <AlertDialogCancel className="border-gray-600 bg-transparent hover:bg-gray-700">Cancel</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => handleDelete(inquiry.id)}>Delete</AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
@@ -135,7 +134,7 @@ export default function InquiryList({ initialInquiries }: { initialInquiries: In
               ))}
             </TableBody>
           </Table>
-        )}
+        </div>
       </div>
       {selectedInquiry && (
         <ContactDialog

@@ -1,50 +1,17 @@
-'use client';
 import Hero from './components/Hero';
-import About from './components/About';
+import BentoGrid from './components/BentoGrid';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import Flipbook from './components/Flipbook';
-import { Separator } from '@/components/ui/separator';
-import { motion } from 'framer-motion';
-import React from 'react';
-
-const AnimatedSection = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 75 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-    >
-      {children}
-    </motion.div>
-  );
-};
 
 export default function Home() {
   return (
-    <>
+    <div className="flex flex-col">
       <Hero />
-      <AnimatedSection>
-        <About />
-      </AnimatedSection>
-      <Separator className="my-12 md:my-24" />
-      <AnimatedSection>
-        <Services />
-      </AnimatedSection>
-      <Separator className="my-12 md:my-24" />
-      <AnimatedSection>
-        <Flipbook />
-      </AnimatedSection>
-      <Separator className="my-12 md:my-24" />
-      <AnimatedSection>
-        <Testimonials />
-      </AnimatedSection>
-      <Separator className="my-12 md:my-24" />
-      <AnimatedSection>
-        <Contact />
-      </AnimatedSection>
-    </>
+      <BentoGrid />
+      <Services />
+      <Testimonials />
+      <Contact />
+    </div>
   );
 }

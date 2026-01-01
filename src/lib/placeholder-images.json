@@ -3,50 +3,38 @@
     {
       "id": "doctor-hero",
       "description": "A professional and welcoming doctor smiling in a modern clinic setting.",
-      "imageUrl": "https://images.unsplash.com/photo-1744723856265-866d19b9cf1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZG9jdG9yJTIwY2xpbmljfGVufDB8fHx8MTc2NzIzNTUxNXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "doctor clinic"
+      "imageUrl": "https://images.unsplash.com/photo-1758691462123-8a17ae95d203?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkb2N0b3IlMjBwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNzY3MjgyMjkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "doctor professional"
     },
     {
       "id": "doctor-about",
       "description": "A close-up portrait of the doctor, looking trustworthy and competent.",
-      "imageUrl": "https://images.unsplash.com/photo-1673865641073-4479f93a7776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkb2N0b3IlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjcyMzMwNjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkb2N0b3IlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjcyMzMwNjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "doctor portrait"
     },
     {
       "id": "testimonial-1",
       "description": "A happy patient giving a thumbs up.",
-      "imageUrl": "https://images.unsplash.com/photo-1533147670608-2a2f9775d3a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NjcyNTE3Njl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1542353436-312f0e1f67ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NjcyNTE3Njl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "happy person"
     },
     {
       "id": "testimonial-2",
       "description": "A smiling person.",
-      "imageUrl": "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c21pbGluZyUyMHBlcnNvbnxlbnwwfHx8fDE3NjcyMzA4Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzbWlsaW5nJTIwcGVyc29ufGVufDB8fHx8MTc2NzIzMDg3OHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "smiling person"
     },
     {
       "id": "testimonial-3",
       "description": "A content person.",
-      "imageUrl": "https://images.unsplash.com/photo-1747995371003-f920a24e7b93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y29udGVudCUyMHBlcnNvbnxlbnwwfHx8fDE3NjcyOTY2ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1758272421492-1efdb36a441f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb250ZW50JTIwcGVyc29ufGVufDB8fHx8MTc2NzI5NjY4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "content person"
     },
     {
-      "id": "service-1",
-      "description": "Medical checkup illustration.",
-      "imageUrl": "https://images.unsplash.com/photo-1621525434111-87a99d170b0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtZWRpY2FsJTIwY2hlY2t1cHxlbnwwfHx8fDE3NjcyOTY2ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "medical checkup"
-    },
-    {
-      "id": "service-2",
-      "description": "Specialized treatment icon.",
-      "imageUrl": "https://images.unsplash.com/photo-1551190822-a9333d879b1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxtZWRpY2FsJTIwdHJlYXRtZW50fGVufDB8fHx8MTc2NzI5NjY4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "medical treatment"
-    },
-    {
-      "id": "service-3",
-      "description": "Consultation icon.",
-      "imageUrl": "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtZWRpY2FsJTIwY29uc3VsdGF0aW9ufGVufDB8fHx8MTc2NzI5NjY4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "medical consultation"
+      "id": "testimonial-4",
+      "description": "Another happy patient.",
+      "imageUrl": "https://images.unsplash.com/photo-1666214277730-e9c7e755e5a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHBhdGllbnR8ZW58MHx8fHwxNzY3Mjk4MTMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy patient"
     }
   ]
 }
