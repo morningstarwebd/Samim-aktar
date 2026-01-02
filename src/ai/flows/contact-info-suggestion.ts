@@ -8,7 +8,7 @@
  * - ContactMessageOutput - The return type for the generateContactMessage function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai} from '@/app/api/genkit/[...slug]/route';
 import {z} from 'genkit';
 
 const ContactMessageInputSchema = z.object({
