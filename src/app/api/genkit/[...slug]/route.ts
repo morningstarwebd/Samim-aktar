@@ -1,6 +1,6 @@
 'use server';
 
-import {createApiHandler} from 'genkit';
+import {createApiHandler} from 'genkit/next';
 import {ai} from '@/ai/genkit';
 
 // This import is what registers the flow with the API handler.
