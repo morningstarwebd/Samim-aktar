@@ -1,14 +1,12 @@
 'use server';
 
 import {createApiHandler} from 'genkit';
-import {genkit} from 'genkit';
-import {googleAI} from '@genkit-ai/google-genai';
+import {ai} from '@/ai/genkit';
 
+// This import is what registers the flow with the API handler.
 import '@/ai/flows/contact-info-suggestion';
 
-export const ai = genkit({
-  plugins: [googleAI()],
-  model: 'googleai/gemini-2.5-flash',
+// This exports the Next.js API route handlers.
+export const {GET, POST} = createApiHandler({
+  ai, // Pass the initialized ai object to the handler
 });
-
-export const {GET, POST} = createApiHandler();
