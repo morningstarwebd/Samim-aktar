@@ -22,7 +22,6 @@ import { format } from "date-fns";
 import { addInquiry } from "@/lib/actions";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Spinner } from "@/components/ui/spinner";
 import { Card } from "@/components/ui/card";
 
@@ -103,120 +102,112 @@ export default function ContactForm() {
   return (
     <Card className="rounded-2xl p-6 shadow-lg">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              {currentStep === 0 && (
-                <div className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="John Doe" {...field} className="rounded-xl"/>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
-                        <FormControl>
-                          <Input placeholder="+1 (555) 123-4567" {...field} className="rounded-xl"/>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              )}
-              {currentStep === 1 && (
-                <div className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="date"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>Preferred Date</FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant={"outline"}
-                                className={cn(
-                                  "rounded-xl pl-3 text-left font-normal",
-                                  !field.value && "text-muted-foreground"
-                                )}
-                              >
-                                {field.value ? (
-                                  format(field.value, "PPP")
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 rounded-2xl" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) =>
-                                date < new Date(new Date().setDate(new Date().getDate() - 1))
-                              }
-                              initialFocus
-                            />
-                          </PopoverContent>
-                        </Popover>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Reason for Visit</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="e.g., Annual check-up, feeling unwell..."
-                            className="resize-none rounded-xl"
-                            {...field}
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+            {currentStep === 0 && (
+              <div className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="John Doe" {...field} className="rounded-xl"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number</FormLabel>
+                      <FormControl>
+                        <Input placeholder="+1 (555) 123-4567" {...field} className="rounded-xl"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Preferred Date</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "rounded-xl pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 rounded-2xl" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date < new Date(new Date().setDate(new Date().getDate() - 1))
+                            }
+                            initialFocus
                           />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Reason for Visit</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="e.g., Annual check-up, feeling unwell..."
+                          className="resize-none rounded-xl"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+            {currentStep === 2 && (
+              <div className="space-y-4 text-sm">
+                <h3 className="text-lg font-bold">Review Your Inquiry</h3>
+                <div className="space-y-2 rounded-xl bg-secondary p-4">
+                  <p><strong>Name:</strong> {watchedValues.name}</p>
+                  <p><strong>Phone:</strong> {watchedValues.phone}</p>
+                  <p><strong>Date:</strong> {watchedValues.date ? format(watchedValues.date, "PPP") : 'Not set'}</p>
+                  <p><strong>Reason:</strong> {watchedValues.message}</p>
                 </div>
-              )}
-              {currentStep === 2 && (
-                <div className="space-y-4 text-sm">
-                  <h3 className="text-lg font-bold">Review Your Inquiry</h3>
-                  <div className="space-y-2 rounded-xl bg-secondary p-4">
-                    <p><strong>Name:</strong> {watchedValues.name}</p>
-                    <p><strong>Phone:</strong> {watchedValues.phone}</p>
-                    <p><strong>Date:</strong> {watchedValues.date ? format(watchedValues.date, "PPP") : 'Not set'}</p>
-                    <p><strong>Reason:</strong> {watchedValues.message}</p>
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+              </div>
+            )}
+          </div>
 
           <div className="mt-8 flex justify-between pt-4">
             {currentStep > 0 && (
